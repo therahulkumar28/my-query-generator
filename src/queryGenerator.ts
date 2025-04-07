@@ -18,6 +18,9 @@ Example:
 ${FEW_SHOT_EXAMPLE}
 
 NOTE: Only return MongoDB query as JSON.
+IMPORTANT: Only return valid MongoDB query in JSON format.
+If the question is not related to the schema, return this exact JSON: []
+
 
 Input: ${userQuestion}
 `;
@@ -27,11 +30,21 @@ Input: ${userQuestion}
     messages: [{ role: "user", content: prompt }],
     temperature: 0
   });
+  console.log(completion)
+  console.log('--------------------------------------------------------------------------------')
+  const rawText = completion.choices[0].message.content || "";
+  console.log("🟡 Raw AI Response:", rawText);
 
-  // Get only the query from response
-  const text = completion.choices[0].message.content || "";
-  const queryText = text.replace("Output: ", "").trim();
+  // Remove "Output: " label if it exists
+  const queryText = rawText.replace("Output:", "").trim();
 
-  // Parse the string into a real JS object
-  return JSON.parse(queryText);
+  try {
+    const parsed = JSON.parse(queryText);
+    console.log("✅ Parsed Query:", parsed);
+    return parsed;
+  } catch (err) {
+    console.error("❌ Failed to parse response:", queryText);
+    throw new Error("Invalid JSON returned by the model.");
+  }
+  
 }

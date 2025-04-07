@@ -4,7 +4,8 @@
   "description": "Usecase of langchain , and llm ",
   "main": ".",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/runQuery.ts"
   },
   "author": "Rahul Kumar",
   "license": "ISC",
@@ -12,5 +13,10 @@
     "dotenv": "^16.4.7",
     "mongodb": "^6.15.0",
     "openai": "^4.91.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
