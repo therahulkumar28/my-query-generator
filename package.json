@@ -1,0 +1,11 @@
+{
+  "name": "mongo-query-generator",
+  "version": "1.0.0",
+  "description": "Usecase of langchain , and llm ",
+  "main": ".",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Kumar",
+  "license": "ISC"
+}
